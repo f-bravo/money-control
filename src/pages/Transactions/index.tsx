@@ -1,34 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Header } from "../../components/Header";
 import { Summary } from "../../components/Summary";
 import { SearchForm } from "./components/SearchForm";
 import { PriceHighLight, TransactionsContainer, TransactionsTable } from "./styles";
+import { TransactionsContext } from "../../contexts/TransactionsContext";
 
-// Tipando os Estados:
-interface Transaction {
-  id: number;
-  description: string;
-  type: 'income' | 'outcome';
-  price: number;
-  category: string;
-  createdAt: string;
-}
+
 
 export function Transaction () {
-  // acessando os dados da API: armazendo info (Estado) p ser consumida
-  const [transactions, setTransactions] = useState<Transaction[]>([])
-
-  //forma de fazer sem escrever dentro do useEffect pois ele n pdoe ser async
-  async function loadTransaction() {
-    const response = await fetch('http://localhost:3333/transactions')
-    const data = await response.json()
-      
-    setTransactions(data)
-  }
-  
-  useEffect(()=> {
-    loadTransaction();
-  }, [])
+  const { transactions } = useContext(TransactionsContext)
 
   return(
     <div>
