@@ -18,10 +18,11 @@ interface TransactionsProviderProps {
   children: ReactNode;
 }
 
+// Add o TypeScrip ao contexto "as TransactionContextType"
 export const TransactionsContext = createContext({} as TransactionContextType)
 
 export function TransactionsProvider({ children }: TransactionsProviderProps) {
-   // acessando os dados da API: armazendo info (Estado) p ser consumida
+   // acessando os dados da API: armazenando info(Estado) p ser consumida
    const [transactions, setTransactions] = useState<Transaction[]>([])
 
    //forma de fazer sem escrever dentro do useEffect pois ele n pdoe ser async
